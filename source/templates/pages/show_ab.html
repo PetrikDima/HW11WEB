@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block content %}
+    <main class="container">
+      <nav
+        style="margin-bottom: 20px; border-bottom: 2px solid; padding-left: 30px"
+      >
+        <ul>
+          <li><a href="{{ back }}" role="button" style="margin-left: 100px" class="secondary">Go back</a></li>
+            <li><a href="/addressbook/" role="button" style="margin-left: 100px">Add contact</a></li>
+          <li><a href="/change_ab/" role="button" style="margin-left: 100px">Change contact</a></li>
+          <li><a href="/delete_ab/" role="button" style="margin-left: 100px">Delete contact</a></li>
+        </ul>
+      </nav>
+      <h1 style="text-align: center">Contacts:</h1>
+      {% for addressbook in addressbooks %}
+          {% if not addressbook.birthday %}
+          <p>Id: <b>{{addressbook.id}}</b></p>
+          <p>Name: <b>{{addressbook.name}}</b></p>
+          <p>Phone: {{ addressbook.phone }}</p>
+          <p>Birthday: Not birthday</p>
+          <p>Email: {{ addressbook.email }}</p>
+          <p>Address: {{ addressbook.address }}</p>
+          <p style="border-bottom: 2px solid"></p>
+          {% else %}
+          <p>Id: <b>{{addressbook.id}}</b></p>
+          <p>Name: <b>{{addressbook.name}}</b></p>
+          <p>Phone: {{ addressbook.phone }}</p>
+          <p>Birthday: <kbd>{{addressbook.birthday.date()}}</kbd></p>
+          <p>Email: {{ addressbook.email }}</p>
+          <p>Address: {{ addressbook.address }}</p>
+          <p style="border-bottom: 2px solid"></p>
+          {% endif %}
+      {% endfor %}
+    </main>
+{% endblock %}
